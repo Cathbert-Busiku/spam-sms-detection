@@ -7,6 +7,7 @@ import joblib
 import string
 import nltk
 from nltk.corpus import stopwords
+import stopwords
 
 
 app = Flask(__name__)

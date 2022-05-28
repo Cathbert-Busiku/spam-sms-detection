@@ -7,6 +7,7 @@ import joblib
 import string
 import nltk
 from nltk.corpus import stopwords
+from sklearn.pipeline import Pipeline
 
 
 app = Flask(__name__)

@@ -1,0 +1,33 @@
+
+.result {
+    padding-top: 1%;
+    width: 45%;
+    border: 1px;
+    border-radius: 10px;
+    margin: 5% 25%;
+}
+
+.result p {
+    font-family: 'Roboto', sans-serif, Helvetica, Arial;
+    color: #000;
+    font-size: 16 px;
+    margin: 0%;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    
+    .result {
+        padding-top: 1%;
+        width: 95%;
+        border: 1px;
+        border-radius: 10px;
+        margin: 25% 2%;
+        padding-right: 0%;
+    }
+    
+    
+}
+
+

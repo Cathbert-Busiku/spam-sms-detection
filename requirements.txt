@@ -1,6 +1,6 @@
 click
 Flask
-gunicorn==20
+gunicorn
 itsdangerous
 Jinja2
 MarkupSafe

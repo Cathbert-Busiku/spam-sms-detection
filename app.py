@@ -42,11 +42,11 @@ def predict():
     #cathbert busiku
     # from sklearn.pipeline import Pipeline
 
-    # pipeline = Pipeline([
-    # ('bow', CountVectorizer(analyzer=text_process)),  # strings to token integer counts
-    # ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
-    # ('classifier', MultinomialNB()),  # train on TF-IDF vectors w/ Naive Bayes classifier
-    # ])
+    pipeline = Pipeline([
+    ('bow', CountVectorizer(analyzer=text_process)),  # strings to token integer counts
+    ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
+    ('classifier', MultinomialNB()),  # train on TF-IDF vectors w/ Naive Bayes classifier
+    ])
 
     # pipeline.fit(msg_train,label_train)
 

@@ -10,5 +10,4 @@ scikit-learn
 Werkzeug
 joblib
 nltk
-strings
 stop-words

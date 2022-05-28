@@ -87,7 +87,8 @@
 
 		
 				<p style="padding-inline-start:0%;">   
-							
+					
+			      {% if info[0] == 'loged' %}
 					{% if prediction[0] == 'spam' %}
 					<!-- <h2 style="color:red;">Spam</h2> -->
 					<div class="alert alert-danger d-flex align-items-center" role="alert">
@@ -109,6 +110,7 @@
 						</div>
 					</div>
 					{% endif %}
+				{% endif %}
 
 				</p>
 

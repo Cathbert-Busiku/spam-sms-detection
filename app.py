@@ -28,9 +28,10 @@ def text_process(mess):
     
     return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
-@app.route('/')
+@app.route('/',methods=['GET'])
 def home():
-    return render_template('index.html')
+    
+    return render_template('index.html', info = 'login')
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -73,15 +74,16 @@ def predict():
 
     # Alternative Usage of Saved Model
     # joblib.dump(clf, 'NB_spam_model.pkl')
-    model = open('spam_model.pkl','rb')
-    spam_model= joblib.load(model)
+    info = ['loged']
 
     if request.method == 'POST':
+        model = open('spam_model.pkl','rb')
+        spam_model= joblib.load(model)
         message = request.form['message']
         data = [message]
         # vect = cv.transform(data).toarray()
         my_prediction = spam_model.predict(data)
-    return render_template('index.html',message = message, prediction = my_prediction)
+    return render_template('index.html', info = info, message = message, prediction = my_prediction)
 
 
 

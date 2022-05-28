@@ -74,7 +74,7 @@ def predict():
 
     # Alternative Usage of Saved Model
     # joblib.dump(clf, 'NB_spam_model.pkl')
-    text_process()
+    
     info = ['loged']
 
     if request.method == 'POST':

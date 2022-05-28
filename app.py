@@ -7,10 +7,12 @@ import joblib
 import string
 import nltk
 from nltk.corpus import stopwords
-from sklearn.pipeline import Pipeline
+import pickle
+
 
 
 app = Flask(__name__)
+
 
 def text_process(mess):
     """
@@ -29,6 +31,7 @@ def text_process(mess):
     
     return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
+
 @app.route('/',methods=['GET'])
 def home():
     
@@ -43,11 +46,11 @@ def predict():
     #cathbert busiku
     # from sklearn.pipeline import Pipeline
 
-    pipeline = Pipeline([
-    ('bow', CountVectorizer(analyzer=text_process)),  # strings to token integer counts
-    ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
-    ('classifier', MultinomialNB()),  # train on TF-IDF vectors w/ Naive Bayes classifier
-    ])
+    # pipeline = Pipeline([
+    # ('bow', CountVectorizer(analyzer=text_process)),  # strings to token integer counts
+    # ('tfidf', TfidfTransformer()),  # integer counts to weighted TF-IDF scores
+    # ('classifier', MultinomialNB()),  # train on TF-IDF vectors w/ Naive Bayes classifier
+    # ])
 
     # pipeline.fit(msg_train,label_train)
 
@@ -75,12 +78,15 @@ def predict():
 
     # Alternative Usage of Saved Model
     # joblib.dump(clf, 'NB_spam_model.pkl')
-    
+    # from text import text_process
+
     info = ['loged']
 
     if request.method == 'POST':
+        
         model = open('spam_model.pkl','rb')
         spam_model= joblib.load(model)
+		
         message = request.form['message']
         data = [message]
         # vect = cv.transform(data).toarray()
@@ -91,3 +97,4 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    text_process(mess)

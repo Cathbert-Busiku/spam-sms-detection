@@ -11,3 +11,4 @@ Werkzeug
 joblib
 nltk
 stop-words
+pickle

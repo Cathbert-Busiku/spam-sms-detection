@@ -52,8 +52,7 @@ def predict():
         
         # model = open('spam_model.pkl','rb')
         # spam_model= joblib.load(model)
-        with open('model_v01.pkl', 'rb') as f:  
-            spam_model = pickle.load(f)
+        
 		
         message = request.form['message']
         data = [message]
@@ -64,5 +63,7 @@ def predict():
 
 
 if __name__ == '__main__':
+    with open('model_v01.pkl', 'rb') as f:  
+            spam_model = pickle.load(f)
     app.run(debug=True)
    

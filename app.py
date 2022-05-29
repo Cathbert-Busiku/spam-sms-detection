@@ -17,6 +17,11 @@ app = Flask(__name__)
 
 
 
+class MyCustomUnpickler(pickle.Unpickler):
+    def find_class(self, module, name):
+        if module == "test":
+            module = "text_process"
+        return super().find_class(module, name)
 
 
 @app.route('/',methods=['GET'])
@@ -37,8 +42,11 @@ def predict():
 
     if request.method == 'POST':
         
-        model = open('spam_model.pkl','rb')
-        spam_model= joblib.load(model)
+        # model = open('spam_model.pkl','rb')
+        # spam_model= joblib.load(model)
+        with open('model_v01.pkl', 'rb') as f:
+            unpickler = MyCustomUnpickler(f)
+            spam_model = unpickler.load()
 		
         message = request.form['message']
         data = [message]

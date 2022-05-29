@@ -17,11 +17,22 @@ app = Flask(__name__)
 
 
 
-class MyCustomUnpickler(pickle.Unpickler):
-    def find_class(self, module, name):
-        if module == "test":
-            module = "text_process"
-        return super().find_class(module, name)
+def text_process(mess):
+    """
+    Takes in a string of text, then performs the following:
+    1. Remove all punctuation
+    2. Remove all stopwords
+    3. Returns a list of the cleaned text
+    """
+    # Check characters to see if they are in punctuation
+    nopunc = [char for char in mess if char not in string.punctuation]
+
+    # Join the characters again to form the string.
+    nopunc = ''.join(nopunc)
+    
+    # Now just remove any stopwords
+    
+    return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
 
 @app.route('/',methods=['GET'])
@@ -29,10 +40,7 @@ def home():
     
     return render_template('index.html', info = 'login')
 
-
-
-
-    
+  
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -44,9 +52,8 @@ def predict():
         
         # model = open('spam_model.pkl','rb')
         # spam_model= joblib.load(model)
-        with open('model_v01.pkl', 'rb') as f:
-            unpickler = MyCustomUnpickler(f)
-            spam_model = unpickler.load()
+        with open('model_v01.pkl', 'rb') as f:  
+            spam_model = pickle.load(f)
 		
         message = request.form['message']
         data = [message]

@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 class MyCustomUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
-        if module == "test":
+        if module ==  "__main__":
             module = "text_process"
         return super().find_class(module, name)
 

@@ -15,7 +15,11 @@ from test import text_process
 
 app = Flask(__name__)
 
-
+class MyCustomUnpickler(pickle.Unpickler):
+    def find_class(self, module, name):
+        if module == "test":
+            module = "text_process"
+        return super().find_class(module, name)
 
 def text_process(mess):
     """
@@ -47,7 +51,11 @@ def predict():
     
 
     info = ['loged']
-
+	
+    with open('model_v01.pkl', 'rb') as f:
+        unpickler = MyCustomUnpickler(f)
+        spam_model = unpickler.load()
+	
     if request.method == 'POST':
         
         # model = open('spam_model.pkl','rb')
